@@ -37,6 +37,7 @@ class RegistrationController extends Controller
             'preferredGender' => 'required'
         ]);
         $user = new User;
+        $user->name = request('name');
         $user->email = request('email');
         $user->info = request('info');
         $user->uuid = RegistrationController::make_uuid();
