@@ -80,7 +80,7 @@ class UserController extends Controller
             if (!in_array($uuid, $matchesArray) and !in_array($nextUser->uuid, $nayedUsers_array))
                 return redirect('/users/' . $nextUser->uuid);
             else
-                UserController::getUser($request, $id);
+                return redirect('/users/next');
         } else {
             $user = User::where('uuid', $id)->firstOrFail();
             $userinfo = json_decode($user->info, true)[0];
