@@ -1,0 +1,19 @@
+.user-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.user-info-container {
+    margin: auto;
+    height: 75%;
+    /*width: 50%;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons {
+    margin-top: 0 auto;
+}
