@@ -33,6 +33,8 @@ class RegistrationController extends Controller
             'bio' => 'required',
             'interests' => 'required',
             'preference' => 'required',
+            'gender' => 'required',
+            'preferredGender' => 'required'
         ]);
         $user = new User;
         $user->email = request('email');
@@ -41,7 +43,7 @@ class RegistrationController extends Controller
         $user->password = bcrypt(request('password'));
         $user->gender = request('gender');
         $user->gender = request('gender');
-        $user->preferred_gender = request('preferred_gender');
+        $user->preferredGender = request('preferredGender');
         $user->info = '[{"bio":"' . request('bio') . '","name":"' . request('name') . '","interests":"' . request('interests') . '","preference":"' . request('preference') . '"}]';
         $user->save();
         event(new Registered($user));
