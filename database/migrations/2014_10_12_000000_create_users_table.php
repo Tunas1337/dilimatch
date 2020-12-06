@@ -20,8 +20,11 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
-            $table->text('profile_photo_path')->nullable();
+            $table->longText('whoHasYayed');
+            $table->longText('nayedUsers');
+            $table->longText('matches');
+            $table->char('gender');
+            $table->char('preferredGender');
             $table->timestamps();
         });
     }
