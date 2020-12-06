@@ -43,7 +43,9 @@ class RegistrationController extends Controller
         $user->uuid = RegistrationController::make_uuid();
         $user->password = bcrypt(request('password'));
         $user->gender = request('gender');
-        $user->gender = request('gender');
+        $user->whoHasYayed = 'null';
+        $user->matches = 'null';
+        $user->nayedUsers = 'null';
         $user->preferredGender = request('preferredGender');
         $user->info = '[{"bio":"' . request('bio') . '","name":"' . request('name') . '","interests":"' . request('interests') . '","preference":"' . request('preference') . '"}]';
         $user->save();
