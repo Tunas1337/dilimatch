@@ -6,8 +6,8 @@ function loadDoc() {
             if (this.responseText !== 'no more users') {
                 console.log(this.responseText);
                 userJson = JSON.parse(this.responseText);
-                $("#yay-btn").disabled = false;
-                $("#nay-btn").disabled = false;
+                $(".btn")[0].disabled = false;
+                $(".btn")[1].disabled = false;
                 document.getElementById('user-bio').innerHTML = userJson.bio;
                 document.getElementById('user-preference').innerHTML = userJson.preference;
                 document.getElementById('user-interests').innerHTML = userJson.interests;
@@ -58,18 +58,20 @@ function SendResponse(action) {
         success: function(data) {
             if (data.includes("MATCH!!!")) {
                 match = data.slice(8, );
-                console.log(match);
+                //console.log(match);
                 match = JSON.parse(match);
                 name = match.name;
                 $('#matchModal').modal('show');
                 $('.matchModal-body').html("<p>You matched with " + name + ".</p>");
             } else {
-                console.log(data);
+                //console.log(data);
+                $(".btn")[0].disabled = false;
+                $(".btn")[1].disabled = false;
                 loadDoc();
             }
         }
     });
-    console.log(userJson);
+    //console.log(userJson);
 }
 loadDoc();
 /*
