@@ -81,7 +81,6 @@ class UserController extends Controller
             #dd($nayedUsers_array);
             #return($matchesArray);
             #$alreadySeen = (in_array($uuid, $matchesArray) and in_array($uuid, $nayedUsers_array));
-            dd($preferredGenders);
             if (!in_array($uuid, $matchesArray) and !in_array($nextUser->uuid, $nayedUsers_array) and in_array($ownGender, $preferredGenders) and in_array($gender, $ownpreferredGenders))
                 return redirect('/users/' . $nextUser->uuid);
             else
