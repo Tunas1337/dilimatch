@@ -4,7 +4,7 @@ function loadDoc() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             if (this.responseText !== 'no more users') {
-                console.log(this.responseText);
+                //console.log(this.responseText);
                 userJson = JSON.parse(this.responseText);
                 $(".btn")[0].disabled = false;
                 $(".btn")[1].disabled = false;
@@ -12,8 +12,8 @@ function loadDoc() {
                 document.getElementById('user-preference').innerHTML = userJson.preference;
                 document.getElementById('user-interests').innerHTML = userJson.interests;
             } else {
-                console.log('kurac');
-                console.log($('#mainModal').children()[0]);
+                //console.log('kurac');
+                //console.log($('#mainModal').children()[0]);
                 $('.user-info-body').html("<div class='alert alert-info'><strong>Sorry, all out!</strong><br/><p>Check back later.</p></div>");
                 $(".btn")[0].disabled = true;
                 $(".btn")[1].disabled = true;
@@ -80,7 +80,7 @@ $(document).ready(function() {
         $(".btn")[0].disabled = true;
         $(".btn")[1].disabled = true;
         var params = '?action=' + action;
-        console.log(userJson);
+//console.log(userJson);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -98,7 +98,7 @@ $(document).ready(function() {
                 document.getElementById('user-bio').innerHTML = userJson.bio;
                 document.getElementById('user-preference').innerHTML = userJson.preference;
                 document.getElementById('user-interests').innerHTML = userJson.interests;
-                console.log(data);
+//console.log(data);
             }
         });
     });

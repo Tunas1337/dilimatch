@@ -109,6 +109,9 @@ class UserController extends Controller
         foreach ($preferredGendersArray as $gender) {
             if ($gender != null) $genders_str = $genders_str . $gender;
         }
+        if($genders_str == '') return redirect(route("profile",[
+            'fail' => true
+        ]));
         $newInfo = '[{"bio":"' . request('bio') . '","name":"' . $name . '","interests":"' . request('interests') . '","preference":"' . request('preference') . '"}]';
         User::where('uuid', $id)->update([
             'info' => $newInfo,

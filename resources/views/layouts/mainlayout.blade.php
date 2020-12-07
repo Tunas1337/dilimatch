@@ -19,8 +19,8 @@
         <div class="alert alert-danger" style="margin-bottom: 0%;" role="alert">
             <b>The site is still under active development!</b> Expect breakage, changes, unpleasantness, but hopefully no security issues. Treat it as experimental until its official release.
           </div>
-        <div data-bs-parallax-bg="true" style="background-image: url(https://picsum.photos/1280/720);background-position: center;background-size: cover;">
-            <div class="ip-icon-bar" style='z-index: 99999;'><a class="ip-active" href="/app"><i class="fa fa-home"></i></a><a href="/app/matches/"><i class="fa fa-envelope"></i></a><a href="/app/profile"><i class="fa fa-globe"></i></a><a href="/logout"><i class="fa fa-sign-out"></i></a></div>
+        <div data-bs-parallax-bg="true" style="background-image: url();background-position: center;background-size: cover;">
+            <div class="ip-icon-bar"><a class="ip-active" href="/app"><i class="fa fa-home"></i></a><a href="/app/matches/"><i class="fa fa-envelope"></i></a><a href="/app/profile"><i class="fa fa-globe"></i></a><a href="/logout"><i class="fa fa-sign-out"></i></a></div>
             @yield('content')
         </div>
         </div>
@@ -28,7 +28,6 @@
         <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="/assets/js/bs-init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <script src="/assets/js/new-age.js"></script>
     </body>
 
     </html>
