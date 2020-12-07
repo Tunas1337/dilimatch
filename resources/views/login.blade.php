@@ -24,7 +24,7 @@ exit();
 
 <body style="background-image:url('assets/img/bg-masthead.jpg');">
     <div class="main">
-        <p class="sign" align="center">Sign in</p>
+        <p class="sign">Sign in</p>
         @if ($message = Session::get('error'))
             <div class="alert alert-danger alert-block">
                 <strong>{{ $message }}</strong>
