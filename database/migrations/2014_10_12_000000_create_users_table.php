@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
             $table->longText('whoHasYayed');
             $table->longText('nayedUsers');
             $table->longText('matches');
-            $table->char('gender');
-            $table->char('preferredGender');
+            $table->char('gender',1);
+            $table->char('preferredGender',3);
             $table->timestamps();
         });
     }

@@ -103,9 +103,15 @@ class UserController extends Controller
     public static function updateUser(Request $request, $id)
     {
         $name = UserController::getName($id);
+        $preferredGendersArray = [request('preferredGender_male'), request('preferredGender_female'), request('preferredGender_other')];
+        $genders_str = '';
+        foreach ($preferredGendersArray as $gender) {
+            if ($gender != null) $genders_str = $genders_str . $gender;
+        }
         $newInfo = '[{"bio":"' . request('bio') . '","name":"' . $name . '","interests":"' . request('interests') . '","preference":"' . request('preference') . '"}]';
         User::where('uuid', $id)->update([
-            'info' => $newInfo
+            'info' => $newInfo,
+            'preferredGender' => $genders_str
         ]);
     }
 }
