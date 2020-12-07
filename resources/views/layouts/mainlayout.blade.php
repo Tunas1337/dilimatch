@@ -16,7 +16,7 @@
     </head>
 
     <body>
-        <div class="alert alert-danger" style="margin-bottom: 0 auto;" role="alert">
+        <div class="alert alert-danger" style="margin-bottom: 0%;" role="alert">
             <b>The site is still under active development!</b> Expect breakage, changes, unpleasantness, but hopefully no security issues. Treat it as experimental until its official release.
           </div>
         <div data-bs-parallax-bg="true" style="height: 92%;background-image: url(https://picsum.photos/1280/720);background-position: center;background-size: cover;">
