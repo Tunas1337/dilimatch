@@ -34,8 +34,12 @@ class RegistrationController extends Controller
             'interests' => 'required',
             'preference' => 'required',
             'gender' => 'required',
-            'preferredGender' => 'required'
         ]);
+        $preferredGendersArray = [request('preferredGender_male'), request('preferredGender_female'), request('preferredGender_other')];
+        $genders_str = '';
+        foreach ($preferredGendersArray as $gender) {
+            if ($gender != null) $genders_str = $genders_str . $gender;
+        }
         $user = new User;
         $user->name = request('name');
         $user->email = request('email');
@@ -46,7 +50,7 @@ class RegistrationController extends Controller
         $user->whoHasYayed = 'null';
         $user->matches = 'null';
         $user->nayedUsers = 'null';
-        $user->preferredGender = request('preferredGender');
+        $user->preferredGender = $genders_str;
         $user->info = '[{"bio":"' . request('bio') . '","name":"' . request('name') . '","interests":"' . request('interests') . '","preference":"' . request('preference') . '"}]';
         $user->save();
         event(new Registered($user));

@@ -1,11 +1,25 @@
 <x-guest-layout>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type='text/javascript'>
+        $(function() {
+            var requiredCheckboxes = $('.preferredGenders :checkbox[required]');
+            requiredCheckboxes.change(function() {
+                if (requiredCheckboxes.is(':checked')) {
+                    requiredCheckboxes.removeAttr('required');
+                } else {
+                    requiredCheckboxes.attr('required', 'required');
+                }
+            });
+        });
+
+    </script>
+
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
-
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
@@ -43,8 +57,12 @@
                 <label for="other">Other</label>
             </div>
             <div class="mt-4">
-                <x-jet-label for="preferredGender" value="{{ __('Preferred gender') }}" />
-                <input type='text' class="block mt-1 w-full" id='preferredGender' name='preferredGender'>
+                <x-jet-label for="preferredGender" value="{{ __('Preferred gender(s)') }}" />
+                <div class="col-md-6 preferredGenders">
+                    <input type="checkbox" name="preferredGender_male" value="m" required /> Male
+                    <input type="checkbox" name="preferredGender_female" value="f" required /> Female
+                    <input type="checkbox" name="preferredGender_other" value="o" required /> Other
+                </div>
             </div>
             <div class="mt-4">
                 <x-jet-label for="bio" value="{{ __('Bio') }}" />
