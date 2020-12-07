@@ -81,6 +81,7 @@ class UserController extends Controller
             #dd($nayedUsers_array);
             #return($matchesArray);
             #$alreadySeen = (in_array($uuid, $matchesArray) and in_array($uuid, $nayedUsers_array));
+            dd($preferredGenders);
             if (!in_array($uuid, $matchesArray) and !in_array($nextUser->uuid, $nayedUsers_array) and in_array($ownGender, $preferredGenders) and in_array($gender, $ownpreferredGenders))
                 return redirect('/users/' . $nextUser->uuid);
             else
@@ -88,7 +89,6 @@ class UserController extends Controller
         } else {
             $user = User::where('uuid', $id)->firstOrFail();
             $userinfo = json_decode($user->info, true)[0];
-            #dd($user->info);
             $name = $returnName ? $userinfo['name'] : 'nuh-uh, not telling you';
             return
                 [
@@ -96,6 +96,7 @@ class UserController extends Controller
                     'interests' => $userinfo['interests'],
                     'preference' => $userinfo['preference'],
                     'uuid' => $id,
+                    'gender' => $user->gender,
                     'name' => $returnName ? $name : 'nuh-uh, not telling you'
                 ];
         }
