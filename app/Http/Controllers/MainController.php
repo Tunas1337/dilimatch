@@ -17,13 +17,14 @@ class MainController extends Controller
     }
     function profile(Request $request)
     {
-        $me = UserController::getUser($request, $request->session()->get('uuid'), true);
+        $me = UserController::getUser($request, $request->session()->get('uuid'), true, true);
         #dd($me);
         if (null !== $request->session()->get('uuid'))  return view('profile', [
             'name' => $me['name'],
             'bio' => $me['bio'],
             'interests' => $me['interests'],
-            'preference' => $me['preference']
+            'preference' => $me['preference'],
+            'preferredGenders' => $me['preferredGenders']
         ]);
         else return redirect()->intended("/login");
     }

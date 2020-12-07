@@ -55,7 +55,7 @@ class UserController extends Controller
             User::where('uuid', $request->session()->get('uuid'))->update(['nayedUsers' => $nayedUsers]);
         }
     }
-    public static function getUser(Request $request, $id, $returnName = false)
+    public static function getUser(Request $request, $id, $returnName = false, $returnPrefGenders = false)
     {
         #dd(Auth::User());
         $users = User::get();
@@ -96,6 +96,7 @@ class UserController extends Controller
                     'preference' => $userinfo['preference'],
                     'uuid' => $id,
                     'gender' => $user->gender,
+                    'preferredGenders' => $returnPrefGenders ? str_split($user->preferredGender) : 'NOPE',
                     'name' => $returnName ? $name : 'nuh-uh, not telling you'
                 ];
         }

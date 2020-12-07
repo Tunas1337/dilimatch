@@ -15,8 +15,8 @@
         });
 
     </script>
-    <div class="user-info-container" id="exampleModalLong" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+    <div class="user-info-container" id="userinfo" tabindex="1" role="dialog"
+        aria-labelledby="userInfo" aria-hidden="false">
         <div class="modal-dialog user-info" role="document">
             <div class="modal-content user-info">
                 <div class='modal-header'>
@@ -41,9 +41,9 @@
                         <div class="mt-4">
                             <x-jet-label for="preferredGender" value="{{ __('Preferred gender(s)') }}" />
                             <div class="col-md-6 preferredGenders">
-                                <input type="checkbox" name="preferredGender_male" value="m" required /> Male
-                                <input type="checkbox" name="preferredGender_female" value="f" required /> Female
-                                <input type="checkbox" name="preferredGender_other" value="o" required /> Other
+                                <input type="checkbox" name="preferredGender_male" value="m" required @if(in_array('m', $preferredGenders)) checked @endif/> Male
+                                <input type="checkbox" name="preferredGender_female" value="f" required @if(in_array('f',$preferredGenders)) checked @endif/> Female
+                                <input type="checkbox" name="preferredGender_other" value="o" required @if(in_array('o',$preferredGenders)) checked @endif/> Other
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
