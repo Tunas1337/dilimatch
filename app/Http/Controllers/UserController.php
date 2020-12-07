@@ -62,13 +62,13 @@ class UserController extends Controller
         if ($id == 'next') {
             $uuid = $request->session()->get('uuid');
             $userCount = $users->count();
-            $randInt = rand(1, $userCount - 1);
+            $randInt = rand(1, $userCount);
             #$nextUser = User::where('preferredGender', 'M')[$randInt];
             $nextUser = User::get()[$randInt];
             #    dd($nextUser);
             #return User::where('uuid', $nextUser->uuid)->first()->whoHasYayed;
             if ($nextUser->uuid == $uuid) {
-                return ('no more users');
+                return redirect('/users/next');
             }
             $whoHasYayed = User::where('uuid', $nextUser->uuid)->first()->whoHasYayed;
             $matchesArray = explode(',', $whoHasYayed);
