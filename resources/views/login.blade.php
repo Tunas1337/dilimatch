@@ -35,8 +35,11 @@ exit();
             <input name="email" class="user" type="text" align="center" placeholder="Username">
             <input name="password" class="pass" type="password" align="center" placeholder="Password">
             <input class="submit" type=submit value="Log in">
-
-
+            <div class="flex items-center justify-end mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                    {{ __('Don\'t have an account?') }}
+                </a>
+            </div>
         </form>
     </div>
     <script src="assets/js/jquery.min.js"></script>
