@@ -62,7 +62,7 @@ class UserController extends Controller
         if ($id == 'next') {
             $uuid = $request->session()->get('uuid');
             $userCount = $users->count();
-            $randInt = rand(1, $userCount);
+            $randInt = rand(1, $userCount-1);
             #$nextUser = User::where('preferredGender', 'M')[$randInt];
             $nextUser = User::get()[$randInt];
             #    dd($nextUser);
@@ -70,6 +70,10 @@ class UserController extends Controller
             if ($nextUser->uuid == $uuid) {
                 return redirect('/users/next');
             }
+            $ownGender = User::where('uuid', $uuid)->first()->gender;
+            $ownpreferredGenders = str_split(User::where('uuid', $uuid)->first()->preferredGender);
+            $gender = User::where('uuid', $nextUser->uuid)->first()->gender;
+            $preferredGenders = str_split(User::where('uuid', $nextUser->uuid)->first()->preferredGender);
             $whoHasYayed = User::where('uuid', $nextUser->uuid)->first()->whoHasYayed;
             $matchesArray = explode(',', $whoHasYayed);
             $nayedUsers = User::where('uuid', $uuid)->first()->nayedUsers;
@@ -77,7 +81,7 @@ class UserController extends Controller
             #dd($nayedUsers_array);
             #return($matchesArray);
             #$alreadySeen = (in_array($uuid, $matchesArray) and in_array($uuid, $nayedUsers_array));
-            if (!in_array($uuid, $matchesArray) and !in_array($nextUser->uuid, $nayedUsers_array))
+            if (!in_array($uuid, $matchesArray) and !in_array($nextUser->uuid, $nayedUsers_array) and in_array($ownGender, $preferredGenders) and in_array($gender, $ownpreferredGenders))
                 return redirect('/users/' . $nextUser->uuid);
             else
                 return ('no more users');
