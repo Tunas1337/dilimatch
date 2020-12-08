@@ -1,10 +1,8 @@
 function loadDoc() {
-    //$('#matchModal').modal('show');
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             if (this.responseText !== 'no more users') {
-                //console.log(this.responseText);
                 userJson = JSON.parse(this.responseText);
                 $(".btn")[0].disabled = false;
                 $(".btn")[1].disabled = false;
@@ -12,13 +10,10 @@ function loadDoc() {
                 document.getElementById('user-preference').innerHTML = userJson.preference;
                 document.getElementById('user-interests').innerHTML = userJson.interests;
             } else {
-                //console.log('kurac');
-                //console.log($('#mainModal').children()[0]);
                 $('.user-info-body').html("<div class='alert alert-info'><strong>Sorry, all out!</strong><br/><p>Check back later.</p></div>");
                 $(".btn")[0].disabled = true;
                 $(".btn")[1].disabled = true;
             }
-            //    document.getElementById("json").innerHTML = this.responseText;
         }
     };
     xhttp.open("GET", "/users/next", true);
@@ -58,49 +53,19 @@ function SendResponse(action) {
         success: function(data) {
             if (data.includes("MATCH!!!")) {
                 match = data.slice(8, );
-                //console.log(match);
                 match = JSON.parse(match);
                 name = match.name;
                 $('#matchModal').modal('show');
                 $('.matchModal-body').html("<p>You matched with " + name + ".</p>");
+                $(".btn")[0].disabled = false;
+                $(".btn")[1].disabled = false;
+                loadDoc();
             } else {
-                //console.log(data);
                 $(".btn")[0].disabled = false;
                 $(".btn")[1].disabled = false;
                 loadDoc();
             }
         }
     });
-    //console.log(userJson);
 }
 loadDoc();
-/*
-$(document).ready(function() {
-    $(".btn").click(function() {
-        $(".btn")[0].disabled = true;
-        $(".btn")[1].disabled = true;
-        var params = '?action=' + action;
-//console.log(userJson);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: "POST",
-            dataType: 'html',
-            url: "/users/" + userJson.uuid + params,
-            success: function(data) {
-                userJson = JSON.parse(this.responseText);
-                //console.log(userJson);
-                $(".btn")[0].disabled = false;
-                $(".btn")[1].disabled = false;
-                document.getElementById('user-bio').innerHTML = userJson.bio;
-                document.getElementById('user-preference').innerHTML = userJson.preference;
-                document.getElementById('user-interests').innerHTML = userJson.interests;
-//console.log(data);
-            }
-        });
-    });
-});
-*/
