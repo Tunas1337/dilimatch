@@ -88,7 +88,7 @@ class UserController extends Controller
             if (!in_array($uuid, $matchesArray) and !in_array($nextUser->uuid, $nayedUsers_array) and in_array($ownGender, $preferredGenders) and in_array($gender, $ownpreferredGenders))
                 return redirect('/users/' . $nextUser->uuid);
             else
-                return ('no more users');
+                return redirect('/users/next');
         } else {
             $user = User::where('uuid', $id)->firstOrFail();
             $userinfo = json_decode($user->info, true)[0];
