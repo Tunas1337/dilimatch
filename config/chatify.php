@@ -107,5 +107,5 @@ return [
     | By default: Chatify\Http\Controllers
     |
     */
-    'namespace' => 'Chatify\Http\Controllers',
+    'namespace' => 'App\Http\Controllers\vendor\Chatify',
 ];
