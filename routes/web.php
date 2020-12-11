@@ -75,3 +75,5 @@ Route::get('/main', function () {
 Route::get('/', function() {
     return redirect('app');
 });
+
+Route::get('/tostsokashkaval', 'App\Http\Controllers\vendor\Chatify\MessagesController@addMatch');

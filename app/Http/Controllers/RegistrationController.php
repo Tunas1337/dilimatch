@@ -53,7 +53,7 @@ class RegistrationController extends Controller
         $user->preferredGender = $genders_str;
         $user->info = '[{"bio":"' . request('bio') . '","name":"' . request('name') . '","interests":"' . request('interests') . '","preference":"' . request('preference') . '"}]';
         $user->save();
-        event(new Registered($user));
+       // event(new Registered($user));
 
         #Fortify::CreateNewUser();
         #$user = User::create(request(['name', 'email', 'password']));

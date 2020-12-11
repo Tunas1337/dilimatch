@@ -356,6 +356,21 @@ class MessagesController extends Controller
             'addData' => 'html'
         ], 200);
     }
+    public function addMatch($uuid = "99eb403e-828f-466b-a497-cb5df7c9d08e")
+    {
+        $id = \App\Http\Controllers\UserController::getChatID($uuid);
+        // check action [star/unstar]
+        if (!Chatify::inFavorite($id)) {
+            // Star
+            Chatify::makeInFavorite($id, 1);
+            $status = 1;
+        }
+
+        // send the response
+        return Response::json([
+            'status' => @$status,
+        ], 200);
+    }
 
     /**
      * Get shared photos

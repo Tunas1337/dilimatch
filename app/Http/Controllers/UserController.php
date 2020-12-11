@@ -19,6 +19,9 @@ class UserController extends Controller
         $userinfo = json_decode($user->info, true)[0];
         return $userinfo['name'];
     }
+    public static function getChatID($uuid) {
+        return User::where('uuid', $uuid)->firstOrFail()->id;
+    }
     public static function handleChoice(Request $request, $id)
     {
         if (request('action') == 'yay') {
@@ -44,6 +47,7 @@ class UserController extends Controller
                 $matches = User::where('uuid', $id)->firstOrFail()->matches;
                 $matches = $matches . ',' . $request->session()->get('uuid');
                 User::where('uuid', $id)->update(['matches' => $matches]);
+                App\Http\Controllers\vendor\Chatify\MessagesController::favorite($id);
                 return ("MATCH!!! " . json_encode(['name' => json_decode($yayedUser->info, true)[0]['name']]));
             }
             #return($whoHasYayed_currentUser);
