@@ -1,4 +1,5 @@
 function loadDoc() {
+    var counter = 0;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -10,9 +11,16 @@ function loadDoc() {
                 document.getElementById('user-preference').innerHTML = userJson.preference;
                 document.getElementById('user-interests').innerHTML = userJson.interests;
             } else {
-                $('.user-info-body').html("<div class='alert alert-info'><strong>Sorry, all out!</strong><br/><p>Check back later.</p></div>");
-                $(".btn")[0].disabled = true;
-                $(".btn")[1].disabled = true;
+                if (counter < 10) {
+                    counter = 0;
+                    $('.user-info-body').html("<div class='alert alert-info'><strong>Sorry, all out!</strong><br/><p>Check back later.</p></div>");
+                    $(".btn")[0].disabled = true;
+                    $(".btn")[1].disabled = true;
+                } else {
+                    counter++;
+                    xhttp.open("GET", "/users/next", true);
+                    xhttp.send();
+                }
             }
         }
     };
