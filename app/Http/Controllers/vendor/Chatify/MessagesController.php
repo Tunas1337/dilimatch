@@ -406,10 +406,13 @@ class MessagesController extends Controller
     {
         // delete
         $delete = Chatify::deleteConversation($request['id']);
+        #dd($request['id']);
+        Chatify::makeInFavorite($request['id'], 0);
 
         // send the response
         return Response::json([
             'deleted' => $delete ? 1 : 0,
+            'request' => $request['id']
         ], 200);
     }
 
