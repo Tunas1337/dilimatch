@@ -34,6 +34,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('users/{id}', 'App\Http\Controllers\UserController@handleChoice');
 
     Route::get('/app', 'App\Http\Controllers\MainController@main')->name('app');
+    Route::get('/app', 'App\Http\Controllers\MainController@main')->name('home');
     #Route::middleware(['auth:sanctum','verified'])->get('/app', 'App\Http\Controllers\MainController@main')->name('app');
 
     #Route::get('/', 'App\Http\Controllers\MainController@main');
