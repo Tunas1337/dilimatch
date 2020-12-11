@@ -356,7 +356,7 @@ class MessagesController extends Controller
             'addData' => 'html'
         ], 200);
     }
-    public function addMatch($uuid = "99eb403e-828f-466b-a497-cb5df7c9d08e")
+    public static function addMatch($uuid = "99eb403e-828f-466b-a497-cb5df7c9d08e")
     {
         $id = \App\Http\Controllers\UserController::getChatID($uuid);
         // check action [star/unstar]

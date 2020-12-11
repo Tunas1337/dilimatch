@@ -47,7 +47,7 @@ class UserController extends Controller
                 $matches = User::where('uuid', $id)->firstOrFail()->matches;
                 $matches = $matches . ',' . $request->session()->get('uuid');
                 User::where('uuid', $id)->update(['matches' => $matches]);
-                vendor\Chatify\MessagesController::favorite($id);
+                vendor\Chatify\MessagesController::addMatch($id);
                 return ("MATCH!!! " . json_encode(['name' => json_decode($yayedUser->info, true)[0]['name']]));
             }
             #return($whoHasYayed_currentUser);
