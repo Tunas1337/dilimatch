@@ -37,7 +37,7 @@
 
                {{-- Contact --}}
                <div class="listOfContacts" style="width: 100%;height: calc(100% - 200px);"></div>
-               
+
            </div>
 
            {{-- ---------------- [ Group Tab ] ---------------- --}}
@@ -86,6 +86,10 @@
         {{-- Messaging area --}}
         <div class="m-body app-scroll">
             <div class="messages">
+                <script type='text/javascript'>
+                // Awful hack for phones
+$('.messenger-listView').show();
+</script>
                 <p class="message-hint" style="margin-top: calc(30% - 126.2px);"><span>Please select a chat to start messaging</span></p>
             </div>
             {{-- Typing indicator --}}

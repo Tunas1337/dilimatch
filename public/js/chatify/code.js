@@ -1,3 +1,5 @@
+// Awful hack for phones
+$('.messenger-listView').show();
 /**
  *-------------------------------------------------------------
  * Global variables
@@ -27,7 +29,7 @@ const messagesContainer = $('.messenger-messagingView .m-body'),
 // Loading svg
 function loadingSVG(w_h = '25px', className = null) {
     return `
-    <svg class="loadingSVG `+ className + `" xmlns="http://www.w3.org/2000/svg" width="` + w_h + `" height="` + w_h + `" viewBox="0 0 40 40" stroke="#2196f3">
+    <svg class="loadingSVG ` + className + `" xmlns="http://www.w3.org/2000/svg" width="` + w_h + `" height="` + w_h + `" viewBox="0 0 40 40" stroke="#2196f3">
       <g fill="none" fill-rule="evenodd">
         <g transform="translate(2 2)" stroke-width="3">
           <circle stroke-opacity=".1" cx="18" cy="18" r="18"></circle>
@@ -92,8 +94,8 @@ function avatarLoading(items) {
 // While sending a message, show this temporary message card.
 function sendigCard(message, id) {
     return `
-    <div class="message-card mc-sender" data-id="`+ id + `">
-        <p>`+ message + `<sub><span class="far fa-clock"></span></sub></p>
+    <div class="message-card mc-sender" data-id="` + id + `">
+        <p>` + message + `<sub><span class="far fa-clock"></span></sub></p>
     </div>
     `;
 }
@@ -103,15 +105,15 @@ function attachmentTemplate(fileType, fileName, imgURL = null) {
         return `
         <div class="attachment-preview">
             <span class="fas fa-times cancel"></span>
-            <p style="padding:0px 30px;"><span class="fas fa-file"></span> `+ fileName + `</p>
+            <p style="padding:0px 30px;"><span class="fas fa-file"></span> ` + fileName + `</p>
         </div>
         `;
     } else {
         return `
         <div class="attachment-preview">
             <span class="fas fa-times cancel"></span>
-            <div class="image-file chat-image" style="background-image: url('`+ imgURL + `');"></div>
-            <p><span class="fas fa-file-image"></span> `+ fileName + `</p>
+            <div class="image-file chat-image" style="background-image: url('` + imgURL + `');"></div>
+            <p><span class="fas fa-file-image"></span> ` + fileName + `</p>
         </div>
         `;
     }
@@ -127,9 +129,10 @@ function activeStatusCircle() {
  * Css Media Queries [For responsive design]
  *-------------------------------------------------------------
  */
-$(window).resize(function () {
+$(window).resize(function() {
     cssMediaQueries();
 });
+
 function cssMediaQueries() {
     if (window.matchMedia('(min-width: 980px)').matches) {
         $('.messenger-listView').removeAttr('style');
@@ -145,11 +148,11 @@ function cssMediaQueries() {
 
 
 /**
-*-------------------------------------------------------------
-* App Modal
-*-------------------------------------------------------------
-*/
-let app_modal = function ({
+ *-------------------------------------------------------------
+ * App Modal
+ *-------------------------------------------------------------
+ */
+let app_modal = function({
     show = true,
     name,
     data = 0,
@@ -165,9 +168,9 @@ let app_modal = function ({
     body ? modal.find('.app-modal-body').html(body) : '';
 
     // buttons
-    buttons == true
-        ? modal.find('.app-modal-footer').show()
-        : modal.find('.app-modal-footer').hide();
+    buttons == true ?
+        modal.find('.app-modal-footer').show() :
+        modal.find('.app-modal-footer').hide();
 
     // show / hide
     if (show == true) {
@@ -310,9 +313,9 @@ function IDinfo(id, type) {
                 $('.messenger-infoView .info-name').html(data.fetch.name);
                 $('.m-header-messaging .user-name').html(data.fetch.name);
                 // Star status
-                data.favorite > 0
-                    ? $('.add-to-favorite').addClass('favorite')
-                    : $('.add-to-favorite').removeClass('favorite');
+                data.favorite > 0 ?
+                    $('.add-to-favorite').addClass('favorite') :
+                    $('.add-to-favorite').removeClass('favorite');
                 // form reset and focus
                 $("#message-form").trigger("reset");
                 cancelAttachment();
@@ -359,8 +362,9 @@ function sendMessage() {
                 $(".message-hint").remove();
                 // append message
                 hasFile
-                    ? messagesContainer.find('.messages').append(sendigCard(messageInput.val() + '\n' + loadingSVG('28px'), tempID))
-                    : messagesContainer.find('.messages').append(sendigCard(messageInput.val(), tempID));
+                    ?
+                    messagesContainer.find('.messages').append(sendigCard(messageInput.val() + '\n' + loadingSVG('28px'), tempID)) :
+                    messagesContainer.find('.messages').append(sendigCard(messageInput.val(), tempID));
                 // scroll to bottom
                 scrollBottom(messagesContainer);
                 messageInput.css({ 'height': '42px' });
@@ -468,7 +472,7 @@ function cancelUpdatingAvatar() {
 var channel = pusher.subscribe('private-chatify');
 
 // Listen to messages, and append if data received
-channel.bind('messaging', function (data) {
+channel.bind('messaging', function(data) {
     // console.info(data.from_id+' - '+data.to_id+'\n'+auth_id+' - '+messenger);
     if (data.from_id == messenger.split('_')[1] && data.to_id == auth_id) {
         // remove message hint
@@ -485,17 +489,17 @@ channel.bind('messaging', function (data) {
 });
 
 // listen to typing indicator
-channel.bind('client-typing', function (data) {
+channel.bind('client-typing', function(data) {
     if (data.from_id == messenger.split('_')[1] && data.to_id == auth_id) {
-        data.typing == true ? messagesContainer.find('.typing-indicator').show()
-            : messagesContainer.find('.typing-indicator').hide();
+        data.typing == true ? messagesContainer.find('.typing-indicator').show() :
+            messagesContainer.find('.typing-indicator').hide();
     }
     // scroll to bottom
     scrollBottom(messagesContainer);
 });
 
 // listen to seen event
-channel.bind('client-seen', function (data) {
+channel.bind('client-seen', function(data) {
     if (data.from_id == messenger.split('_')[1] && data.to_id == auth_id) {
         if (data.seen == true) {
             $('.message-time').find('.fa-check').before('<span class="fas fa-check-double seen"></span> ');
@@ -508,10 +512,10 @@ channel.bind('client-seen', function (data) {
 });
 
 // listen to contact item updates event
-channel.bind('client-contactItem', function (data) {
+channel.bind('client-contactItem', function(data) {
     if (data.update_for == auth_id) {
-        data.updating == true ? updateContatctItem(data.update_to)
-            : console.error('[Contact Item updates] Updating failed!');
+        data.updating == true ? updateContatctItem(data.update_to) :
+            console.error('[Contact Item updates] Updating failed!');
     }
 });
 
@@ -520,14 +524,14 @@ channel.bind('client-contactItem', function (data) {
 var activeStatusChannel = pusher.subscribe('presence-activeStatus');
 
 // Joined
-activeStatusChannel.bind('pusher:member_added', function (member) {
+activeStatusChannel.bind('pusher:member_added', function(member) {
     setActiveStatus(1, member.id);
     $('.messenger-list-item[data-contact=' + member.id + ']').find('.activeStatus').remove();
     $('.messenger-list-item[data-contact=' + member.id + ']').find('.avatar').before(activeStatusCircle());
 });
 
 // Leaved
-activeStatusChannel.bind('pusher:member_removed', function (member) {
+activeStatusChannel.bind('pusher:member_removed', function(member) {
     setActiveStatus(0, member.id);
     $('.messenger-list-item[data-contact=' + member.id + ']').find('.activeStatus').remove();
 });
@@ -597,10 +601,10 @@ function checkInternet(state, selector) {
                 messengerTitle.text(messengerTitleDefault);
                 selector.addClass('successBG-rgba');
                 selector.find('span').hide();
-                selector.slideDown('fast', function () {
+                selector.slideDown('fast', function() {
                     selector.find('.ic-connected').show();
                 });
-                setTimeout(function () {
+                setTimeout(function() {
                     $('.internet-connection').slideUp('fast');
                 }, 3000);
             }
@@ -609,17 +613,17 @@ function checkInternet(state, selector) {
             messengerTitle.text($('.ic-connecting').text());
             selector.removeClass('successBG-rgba');
             selector.find('span').hide();
-            selector.slideDown('fast', function () {
+            selector.slideDown('fast', function() {
                 selector.find('.ic-connecting').show();
             });
             net_errs = 1;
             break;
-        // Not connected
+            // Not connected
         default:
             messengerTitle.text($('.ic-noInternet').text());
             selector.removeClass('successBG-rgba');
             selector.find('span').hide();
-            selector.slideDown('fast', function () {
+            selector.slideDown('fast', function() {
                 selector.find('.ic-noInternet').show();
             });
             net_errs = 1;
@@ -692,9 +696,9 @@ function star(user_id) {
             data: { '_token': access_token, 'user_id': user_id },
             dataType: 'JSON',
             success: (data) => {
-                data.status > 0
-                    ? $('.add-to-favorite').addClass('favorite')
-                    : $('.add-to-favorite').removeClass('favorite');
+                data.status > 0 ?
+                    $('.add-to-favorite').addClass('favorite') :
+                    $('.add-to-favorite').removeClass('favorite');
 
             },
             error: () => {
@@ -764,9 +768,9 @@ function messengerSearch(input) {
         },
         success: (data) => {
             $('.search-records').find('svg').remove();
-            data.addData == 'append'
-                ? $('.search-records').append(data.records)
-                : $('.search-records').html(data.records);
+            data.addData == 'append' ?
+                $('.search-records').append(data.records) :
+                $('.search-records').html(data.records);
             // update data-action required with [responsive design]
             cssMediaQueries();
         },
@@ -908,7 +912,7 @@ function setActiveStatus(status, user_id) {
  * On DOM ready
  *-------------------------------------------------------------
  */
-$(document).ready(function () {
+$(document).ready(function() {
     // get contacts list
     getContacts();
 
@@ -925,18 +929,18 @@ $(document).ready(function () {
     autosize($('.m-send'));
 
     // check if pusher has access to the channel [Internet status]
-    pusher.connection.bind('state_change', function (states) {
+    pusher.connection.bind('state_change', function(states) {
         let selector = $('.internet-connection');
         checkInternet(states.current, selector);
         // listening for pusher:subscription_succeeded
-        channel.bind('pusher:subscription_succeeded', function () {
+        channel.bind('pusher:subscription_succeeded', function() {
             // On connection state change [Updating] and get [info & msgs]
             IDinfo(messenger.split('_')[1], messenger.split('_')[0]);
         });
     });
 
     // tabs on click, show/hide...
-    $('.messenger-listView-tabs a').on('click', function () {
+    $('.messenger-listView-tabs a').on('click', function() {
         var dataView = $(this).attr('data-view');
         $('.messenger-listView-tabs a').removeClass('active-tab');
         $(this).addClass('active-tab');
@@ -945,23 +949,23 @@ $(document).ready(function () {
     });
 
     // set item active on click
-    $('body').on('click', '.messenger-list-item', function () {
+    $('body').on('click', '.messenger-list-item', function() {
         $('.messenger-list-item').removeClass('m-list-active');
         $(this).addClass('m-list-active');
     });
 
     // show info side button
-    $('.messenger-infoView nav a , .show-infoSide').on('click', function () {
+    $('.messenger-infoView nav a , .show-infoSide').on('click', function() {
         $('.messenger-infoView').toggle();
     });
 
     // x button for info section to show the main button.
-    $('.messenger-infoView nav a').on('click', function () {
+    $('.messenger-infoView nav a').on('click', function() {
         $('.show-infoSide').show();
     });
 
     // hide showing button for info section.
-    $('.show-infoSide').on('click', function () {
+    $('.show-infoSide').on('click', function() {
         $(this).hide();
     });
 
@@ -969,7 +973,7 @@ $(document).ready(function () {
     hScroller('.messenger-favorites');
 
     // click action for list item [user/group]
-    $('body').on('click', '.messenger-list-item', function () {
+    $('body').on('click', '.messenger-list-item', function() {
         if ($(this).find('tr[data-action]').attr('data-action') == "1") {
             $('.messenger-listView').hide();
         }
@@ -978,7 +982,7 @@ $(document).ready(function () {
     });
 
     // click action for favorite button
-    $('body').on('click', '.favorite-list-item', function () {
+    $('body').on('click', '.favorite-list-item', function() {
         if ($(this).find('div').attr('data-action') == "1") {
             $('.messenger-listView').hide();
         }
@@ -987,15 +991,15 @@ $(document).ready(function () {
     });
 
     // list view buttons
-    $('.listView-x').on('click', function () {
+    $('.listView-x').on('click', function() {
         $('.messenger-listView').hide();
     });
-    $('.show-listView').on('click', function () {
+    $('.show-listView').on('click', function() {
         $('.messenger-listView').show();
     });
 
     // click action for [add to favorite] button.
-    $('.add-to-favorite').on('click', function () {
+    $('.add-to-favorite').on('click', function() {
         star(messenger.split('_')[1]);
     });
 
@@ -1054,54 +1058,54 @@ $(document).ready(function () {
         if (typingNow < 1) {
             // Trigger typing
             let triggered = isTyping(true);
-            triggered ? console.info('[+] Triggered')
-                : console.error('[+] Not triggered');
+            triggered ? console.info('[+] Triggered') :
+                console.error('[+] Not triggered');
             // Typing now
             typingNow = 1;
         }
         // Clear typing timeout
         clearTimeout(typingTimeout);
         // Typing timeout
-        typingTimeout = setTimeout(function () {
+        typingTimeout = setTimeout(function() {
             triggered = isTyping(false);
-            triggered ? console.info('[-] Triggered')
-                : console.error('[-] Not triggered');
+            triggered ? console.info('[-] Triggered') :
+                console.error('[-] Not triggered');
             // Clear typing now
             typingNow = 0;
         }, 1000);
     });
 
     // Image modal
-    $('body').on('click', ".chat-image", function () {
+    $('body').on('click', ".chat-image", function() {
         let src = $(this).css("background-image").split(/"/)[1];
         $("#imageModalBox").show();
         $("#imageModalBoxSrc").attr('src', src);
     });
-    $('.imageModal-close').on('click', function () {
+    $('.imageModal-close').on('click', function() {
         $("#imageModalBox").hide();
     });
 
     // Search input on focus
-    $('.messenger-search').on('focus', function () {
+    $('.messenger-search').on('focus', function() {
         $('.messenger-tab').hide();
         $('.messenger-tab[data-view="search"]').show();
     });
     // Search action on keyup
-    $('.messenger-search').on('keyup', function (e) {
-        $.trim($(this).val()).length > 0
-            ? $('.messenger-search').trigger('focus') + messengerSearch($(this).val())
-            : $('.messenger-tab').hide() +
+    $('.messenger-search').on('keyup', function(e) {
+        $.trim($(this).val()).length > 0 ?
+            $('.messenger-search').trigger('focus') + messengerSearch($(this).val()) :
+            $('.messenger-tab').hide() +
             $('.messenger-listView-tabs a[data-view="users"]').trigger('click');
     });
 
     // Delete Conversation button
-    $('.messenger-infoView-btns .delete-conversation').on('click', function () {
+    $('.messenger-infoView-btns .delete-conversation').on('click', function() {
         app_modal({
             name: 'delete',
         });
     });
     // delete modal [delete button]
-    $('.app-modal[data-name=delete]').find('.app-modal-footer .delete').on('click', function () {
+    $('.app-modal[data-name=delete]').find('.app-modal-footer .delete').on('click', function() {
         deleteConversation(messenger.split('_')[1]);
         app_modal({
             show: false,
@@ -1109,7 +1113,7 @@ $(document).ready(function () {
         });
     });
     // delete modal [cancel button]
-    $('.app-modal[data-name=delete]').find('.app-modal-footer .cancel').on('click', function () {
+    $('.app-modal[data-name=delete]').find('.app-modal-footer .cancel').on('click', function() {
         app_modal({
             show: false,
             name: 'delete',
@@ -1117,7 +1121,7 @@ $(document).ready(function () {
     });
 
     // Settings button action to show settings modal
-    $('.settings-btn').on('click', function () {
+    $('.settings-btn').on('click', function() {
         app_modal({
             name: 'settings',
         });
@@ -1129,7 +1133,7 @@ $(document).ready(function () {
         updateSettings();
     });
     // Settings modal [cancel button]
-    $('.app-modal[data-name=settings]').find('.app-modal-footer .cancel').on('click', function () {
+    $('.app-modal[data-name=settings]').find('.app-modal-footer .cancel').on('click', function() {
         app_modal({
             show: false,
             name: 'settings',
@@ -1160,13 +1164,13 @@ $(document).ready(function () {
         });
     });
     // change messenger color button
-    $('body').on('click', '.update-messengerColor a', function () {
+    $('body').on('click', '.update-messengerColor a', function() {
         messengerColor = $(this).attr('class').split(' ')[0];
         $('.update-messengerColor a').removeClass('m-color-active');
         $(this).addClass('m-color-active');
     });
     // Switch to Dark/Light mode
-    $('body').on('click', '.dark-mode-switch', function () {
+    $('body').on('click', '.dark-mode-switch', function() {
         if ($(this).attr('data-mode') == '0') {
             $(this).attr('data-mode', '1');
             $(this).removeClass('far');
