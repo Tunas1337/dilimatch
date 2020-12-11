@@ -286,7 +286,7 @@ class MessagesController extends Controller
      * @param Request $request
      * @return void
      */
-    public function favorite(Request $request)
+    public static function favorite(Request $request)
     {
         // check action [star/unstar]
         if (Chatify::inFavorite($request['user_id'])) {
