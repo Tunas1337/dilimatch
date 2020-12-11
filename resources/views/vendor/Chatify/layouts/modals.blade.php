@@ -3,7 +3,7 @@
     <span class="imageModal-close">&times;</span>
     <img class="imageModal-content" id="imageModalBoxSrc">
   </div>
-  
+
   {{-- ---------------------- Delete Modal ---------------------- --}}
   <div class="app-modal" data-name="delete">
       <div class="app-modal-container">
@@ -43,17 +43,17 @@
                       ></div>
                       <p class="upload-avatar-details"></p>
                       <label class="app-btn a-btn-primary update">
-                          Upload profile photo
+                          Upload profile photo <b>(currently broken!)</b>
                           <input class="upload-avatar" accept="image/*" name="avatar" type="file" style="display: none" />
                       </label>
                       {{-- Dark/Light Mode  --}}
                       <p class="divider"></p>
-                      <p class="app-modal-header">Dark Mode <span class="
+                      <p class="app-modal-header">Dark Mode™ <span class="
                         {{ Auth::user()->dark_mode > 0 ? 'fas' : 'far' }} fa-moon dark-mode-switch"
                          data-mode="{{ Auth::user()->dark_mode > 0 ? 1 : 0 }}"></span></p>
                       {{-- change messenger color  --}}
                       <p class="divider"></p>
-                      <p class="app-modal-header">Change {{ config('chatify.name') }} Color</p>
+                      <p class="app-modal-header">Change chat color</p>
                       <div class="update-messengerColor">
                             <a href="javascript:void(0)" class="messengerColor-1"></a>
                             <a href="javascript:void(0)" class="messengerColor-2"></a>
