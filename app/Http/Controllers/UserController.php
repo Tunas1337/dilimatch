@@ -13,6 +13,11 @@ class UserController extends Controller
         $user = User::where('email', $email)->firstOrFail();
         return $user->uuid;
     }
+    public static function isEmailVerified($email)
+    {
+        $user = User::where('email', $email)->firstOrFail();
+        return $user->email_verified_at;
+    }
     public static function getName($id)
     {
         $user = User::where('uuid', $id)->firstOrFail();

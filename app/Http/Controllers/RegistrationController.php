@@ -57,8 +57,12 @@ class RegistrationController extends Controller
 
         #Fortify::CreateNewUser();
         #$user = User::create(request(['name', 'email', 'password']));
+        ##########################
+        #Don't automatically log user in; instead redirect them to a page that says they need to be verified
+        ##########################
+        //Auth::login($user);
+        return view('auth.verify-email');
 
-        Auth::login($user);
         if (!$request->session()->exists('uuid'))
             $request->session()->put('uuid', $user->uuid);
         return redirect("app");
