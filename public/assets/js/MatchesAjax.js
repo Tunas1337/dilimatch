@@ -13,7 +13,7 @@ function loadDoc() {
                 document.getElementById('user-preference').innerHTML = userJson.preference;
                 document.getElementById('user-interests').innerHTML = userJson.interests;
             } else {
-                if (counter > 15) {
+                if (counter > 5) {
                     counter = 0;
                     $('.user-info-body').html("<div class='alert alert-info'><strong>Sorry, all out!</strong><br/><p>Check back later.</p></div>");
                     $(".btn")[0].disabled = true;
@@ -64,9 +64,9 @@ function SendResponse(action) {
             if (data.includes("MATCH!!!")) {
                 match = data.slice(8, );
                 match = JSON.parse(match);
-                name = match.name;
+                matchName = match.name;
                 $('#matchModal').modal('show');
-                $('.matchModal-body').html("<p>You matched with " + name + ".</p>");
+                $('.matchModal-body').html("<p>You matched with " + matchName + ".</p>");
                 $(".btn")[0].disabled = false;
                 $(".btn")[1].disabled = false;
                 loadDoc();
