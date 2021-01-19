@@ -72,7 +72,7 @@ return [
     |
     */
     'user_avatar' => [
-        'folder' => 'users-avatar',
+        'folder' => 'app/public/users-avatar',
         'default' => 'avatar.png',
     ],
 
