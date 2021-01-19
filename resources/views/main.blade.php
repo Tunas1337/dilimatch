@@ -6,13 +6,16 @@
         aria-hidden="false">
         <div class="modal-dialog user-info" role="document">
             <div class="modal-content user-info">
-                <div class="user-info-body modal-body">
+                <div class="user-info-body modal-body" id="user-info" style="display:none">
                     <strong>Bio:</strong>
                     <p id='user-bio'></p>
                     <strong>Interests:</strong>
                     <p id='user-interests'></p>
                     <strong>Preference:</strong>
                     <p id='user-preference'></p>
+                </div>
+                <div class="user-info-body modal-body" id="loading">
+                    <p>Loading...</p>
                 </div>
                 <div class="modal-footer buttons">
                     <button type="button" id='yay-btn' class="btn btn-success" onclick="SendResponse('yay')"> Yeah</button>

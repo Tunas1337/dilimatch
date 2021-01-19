@@ -77,7 +77,8 @@ class UserController extends Controller
             #    dd($nextUser);
             #return User::where('uuid', $nextUser->uuid)->first()->whoHasYayed;
             if ($nextUser->uuid == $uuid or UserController::isEmailVerified($nextUser->email) == null) {
-                return redirect('/users/next');
+                #return redirect('/users/next');
+                return 'no more users';
             }
             $ownGender = User::where('uuid', $uuid)->first()->gender;
             $ownpreferredGenders = str_split(User::where('uuid', $uuid)->first()->preferredGender);

@@ -7,11 +7,13 @@ function loadDoc() {
                 userJson = JSON.parse(this.responseText);
                 $(".btn")[0].disabled = false;
                 $(".btn")[1].disabled = false;
+                document.getElementById('loading').style.display = "none";
+                document.getElementById('user-info').style.display = "";
                 document.getElementById('user-bio').innerHTML = userJson.bio;
                 document.getElementById('user-preference').innerHTML = userJson.preference;
                 document.getElementById('user-interests').innerHTML = userJson.interests;
             } else {
-                if (counter > 10) {
+                if (counter > 15) {
                     counter = 0;
                     $('.user-info-body').html("<div class='alert alert-info'><strong>Sorry, all out!</strong><br/><p>Check back later.</p></div>");
                     $(".btn")[0].disabled = true;
