@@ -356,13 +356,19 @@ class MessagesController extends Controller
             'addData' => 'html'
         ], 200);
     }
-    public static function addMatch($uuid = "99eb403e-828f-466b-a497-cb5df7c9d08e")
+    public static function addMatch($uuid = "99eb403e-828f-466b-a497-cb5df7c9d08e", $matched_uuid)
     {
-        $id = \App\Http\Controllers\UserController::getChatID($uuid);
+        $id_matcher = \App\Http\Controllers\UserController::getChatID($uuid);
+        $id_matched = \App\Http\Controllers\UserController::getChatID($matched_uuid);
         // check action [star/unstar]
-        if (!Chatify::inFavorite($id)) {
+        if (!Chatify::inFavorite($id_matcher)) {
             // Star
-            Chatify::makeInFavorite($id, 1);
+            Chatify::makeInFavorite($id_matcher, 1);
+            $status = 1;
+        }
+        if (!Chatify::inFavorite($id_matched)) {
+            // Star
+            Chatify::makeInFavorite($id_matched, 1);
             $status = 1;
         }
 
