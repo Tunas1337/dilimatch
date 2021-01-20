@@ -57,7 +57,7 @@
                 <label for="other">Other</label>
             </div>
             <div class="mt-4">
-                <x-jet-label for="preferredGender" value="{{ __('Preferred gender(s)') }}" />
+                <x-jet-label for="preferredGender" value="{{ __('Preferred gender(s) (or, which gender(s) you would like to be shown?') }}" />
                 <div class="col-md-6 preferredGenders">
                     <input type="checkbox" name="preferredGender_male" value="m" required /> Male
                     <input type="checkbox" name="preferredGender_female" value="f" required /> Female

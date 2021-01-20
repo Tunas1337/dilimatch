@@ -46,7 +46,7 @@
                     <form method="post" id='edit_userinfo' name="edit_userinfo" action="{{ url('/app/profile/update') }}">
                         {{ csrf_field() }}
                         <div class="mt-4">
-                            <x-jet-label for="preferredGender" value="{{ __('Preferred gender(s)') }}" />
+                            <x-jet-label for="preferredGender" value="{{ __('Preferred gender(s) (or, which gender(s) you would like to be shown)') }}" />
                             <div class="alert alert-danger" id='nogender' style='display:none;'><i>Please choose at least one preferred gender.</i></div>
                             <div class="col-md-6 preferredGenders">
                                 <input type="checkbox" name="preferredGender_male" value="m" @if (in_array('m', $preferredGenders)) checked @endif/> Male
