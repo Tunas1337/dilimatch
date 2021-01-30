@@ -46,6 +46,17 @@
                     <form method="post" id='edit_userinfo' name="edit_userinfo" action="{{ url('/app/profile/update') }}">
                         {{ csrf_field() }}
                         <div class="mt-4">
+                            <x-jet-label for="gender" value="{{ __('Preferred gender(s) (or, which gender you are)') }}" />
+                            <div class="alert alert-danger" id='nogender-own' style='display:none;'><i>Please choose your gender.</i></div>
+                            <div class="col-md-6 preferredGenders">
+                                <input type="radio" name="gender" value="m" @if ($gender == 'm') checked @endif required/> Male
+                                <input type="radio" name="gender" value="f" @if ($gender == 'f') checked @endif/>
+                                Female
+                                <input type="radio" name="gender" value="o" @if ($gender == 'o') checked @endif/>
+                                Other
+                            </div>
+                        </div>
+                        <div class="mt-4">
                             <x-jet-label for="preferredGender" value="{{ __('Preferred gender(s) (or, which gender(s) you would like to be shown)') }}" />
                             <div class="alert alert-danger" id='nogender' style='display:none;'><i>Please choose at least one preferred gender.</i></div>
                             <div class="col-md-6 preferredGenders">

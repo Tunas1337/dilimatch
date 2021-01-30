@@ -24,31 +24,30 @@
             @csrf
 
             <div>
-                <x-jet-label for="name"
-                    value="{{ __('First name (if there are several people with your name, add the first initial of your last name)') }}" />
+                <p id="name">{{ __('First name (if there are several people with your name, add the first initial of your last name)') }}</p>
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
                     autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('Email (must be @student.uwcdilijan.am!!!)') }}" />
+                <p id="email">{{ __('Email (must be @student.uwcdilijan.am!!!)') }}</p>
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
                     required />
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
+                <p id="password">{{ __('Password') }}</p>
                 <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required
                     autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Confirm password') }}" />
+                <p id="password_confirmation">{{ __('Confirm password') }}</p>
                 <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password"
                     name="password_confirmation" required autocomplete="new-password" />
             </div>
             <div class="mt-4">
-                <x-jet-label for="gender" value="{{ __('Your gender') }}" />
+                <p id="gender">{{ __('Your gender') }}</p>
                 <input type="radio" id="male" name="gender" value="m">
                 <label for="male">Male</label>
                 <input type="radio" id="female" name="gender" value="f">
@@ -57,7 +56,7 @@
                 <label for="other">Other</label>
             </div>
             <div class="mt-4">
-                <x-jet-label for="preferredGender" value="{{ __('Preferred gender(s) (or, which gender(s) you would like to be shown?') }}" />
+                <p id="preferredGender">{{ __('Preferred gender(s) (or, which gender(s) you would like to be shown?)') }}</p>
                 <div class="col-md-6 preferredGenders">
                     <input type="checkbox" name="preferredGender_male" value="m" required /> Male
                     <input type="checkbox" name="preferredGender_female" value="f" required /> Female
@@ -65,17 +64,17 @@
                 </div>
             </div>
             <div class="mt-4">
-                <x-jet-label for="bio" value="{{ __('Bio') }}" />
+                <p id="bio">{{ __('Bio') }}</p>
                 <x-jet-input id="bio" class="block mt-1 w-full" type="textbox" name="bio" :value="old('bio')"
                     required />
             </div>
             <div class="mt-4">
-                <x-jet-label for="interests" value="{{ __('Interests (what do you like doing?)') }}" />
+                <p id="interests">{{ __('Interests (what do you like doing?)') }}</p>
                 <x-jet-input id="interests" class="block mt-1 w-full" type="textbox" name="interests"
                     :value="old('interests')" required />
             </div>
             <div class="mt-4">
-                <x-jet-label for="preference" value="{{ __('Preferences (what are you looking for?)') }}" />
+                <p id="preference">{{ __('Preferences (what are you looking for?)') }}</p>
                 <x-jet-input id="preference" class="block mt-1 w-full" type="textarea" name="preference"
                     :value="old('preference')" required />
             </div>

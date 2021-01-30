@@ -24,6 +24,7 @@ class MainController extends Controller
             'bio' => $me['bio'],
             'interests' => $me['interests'],
             'preference' => $me['preference'],
+            'gender' => $me['gender'],
             'preferredGenders' => $me['preferredGenders']
         ]);
         else return redirect()->intended("/login");

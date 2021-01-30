@@ -115,6 +115,7 @@ class UserController extends Controller
     {
         $name = UserController::getName($id);
         $preferredGendersArray = [request('preferredGender_male'), request('preferredGender_female'), request('preferredGender_other')];
+        $own_gender = request('gender');
         $genders_str = '';
         foreach ($preferredGendersArray as $gender) {
             if ($gender != null) $genders_str = $genders_str . $gender;
@@ -125,7 +126,8 @@ class UserController extends Controller
         $newInfo = '[{"bio":"' . request('bio') . '","name":"' . $name . '","interests":"' . request('interests') . '","preference":"' . request('preference') . '"}]';
         User::where('uuid', $id)->update([
             'info' => $newInfo,
-            'preferredGender' => $genders_str
+            'preferredGender' => $genders_str,
+            'gender' => $own_gender
         ]);
     }
 }
