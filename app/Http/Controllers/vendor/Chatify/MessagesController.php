@@ -366,11 +366,12 @@ class MessagesController extends Controller
             Chatify::makeInFavorite($id_matcher, 1);
             $status = 1;
         }
-        if (!Chatify::inFavorite($id_matched)) {
-            // Star
-            Chatify::makeInFavorite($id_matched, 1);
-            $status = 1;
-        }
+        $star = new Favorite();
+        $star->id = rand(9,99999999);
+        $star->user_id = $id_matcher;
+        $star->favorite_id = $id_matched;
+        $star->save();
+        return $star ? true : false;
 
         // send the response
         return Response::json([
