@@ -1,16 +1,13 @@
 <x-guest-layout>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type='text/javascript'>
-        $(function() {
-            var requiredCheckboxes = $('.preferredGenders :checkbox[required]');
-            requiredCheckboxes.change(function() {
-                if (requiredCheckboxes.is(':checked')) {
-                    requiredCheckboxes.removeAttr('required');
-                } else {
-                    requiredCheckboxes.attr('required', 'required');
-                }
-            });
-        });
+        function submitAllIfNone() {
+            var checkedCheckboxes = $('.preferredGenders :checked');
+            if(checkedCheckboxes.length == 0) {
+                $('.preferredGenders :checkbox').prop('checked', 'true')
+            }
+            document.getElementById('registration-form').submit();
+        }
 
     </script>
 
@@ -20,7 +17,7 @@
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
-        <form method="POST" action="{{ route('register') }}">
+        <form id="registration-form" method="POST" action="{{ route('register') }}">
             @csrf
 
             <div>
@@ -58,9 +55,9 @@
             <div class="mt-4">
                 <p id="preferredGender">{{ __('Preferred gender(s) (or, which gender(s) you would like to be shown to match with?)') }}</p>
                 <div class="col-md-6 preferredGenders">
-                    <input type="checkbox" name="preferredGender_male" value="m" required /> Male
-                    <input type="checkbox" name="preferredGender_female" value="f" required /> Female
-                    <input type="checkbox" name="preferredGender_other" value="o" required /> Other
+                    <input type="checkbox" name="preferredGender_male" value="m"/> Male
+                    <input type="checkbox" name="preferredGender_female" value="f"/> Female
+                    <input type="checkbox" name="preferredGender_other" value="o"/> Other
                 </div>
             </div>
             <div class="mt-4">
@@ -83,9 +80,9 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-jet-button class="ml-4">
-                    {{ __('Register') }}
-                </x-jet-button>
+                <button onclick="submitAllIfNone()" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ml-4">
+                    Register
+                </button>
             </div>
         </form>
     </x-jet-authentication-card>

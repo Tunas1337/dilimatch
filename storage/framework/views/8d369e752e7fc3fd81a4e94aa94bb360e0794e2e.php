@@ -6,16 +6,13 @@
 <?php $component->withAttributes([]); ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type='text/javascript'>
-        $(function() {
-            var requiredCheckboxes = $('.preferredGenders :checkbox[required]');
-            requiredCheckboxes.change(function() {
-                if (requiredCheckboxes.is(':checked')) {
-                    requiredCheckboxes.removeAttr('required');
-                } else {
-                    requiredCheckboxes.attr('required', 'required');
-                }
-            });
-        });
+        function submitAllIfNone() {
+            var checkedCheckboxes = $('.preferredGenders :checked');
+            if(checkedCheckboxes.length == 0) {
+                $('.preferredGenders :checkbox').prop('checked', 'true')
+            }
+            document.getElementById('registration-form').submit();
+        }
 
     </script>
 
@@ -52,7 +49,7 @@
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?> 
-        <form method="POST" action="<?php echo e(route('register')); ?>">
+        <form id="registration-form" method="POST" action="<?php echo e(route('register')); ?>">
             <?php echo csrf_field(); ?>
 
             <div>
@@ -128,11 +125,11 @@
                 <label for="other">Other</label>
             </div>
             <div class="mt-4">
-                <p id="preferredGender"><?php echo e(__('Preferred gender(s) (or, which gender(s) you would like to be shown?')); ?></p>
+                <p id="preferredGender"><?php echo e(__('Preferred gender(s) (or, which gender(s) you would like to be shown to match with?)')); ?></p>
                 <div class="col-md-6 preferredGenders">
-                    <input type="checkbox" name="preferredGender_male" value="m" required /> Male
-                    <input type="checkbox" name="preferredGender_female" value="f" required /> Female
-                    <input type="checkbox" name="preferredGender_other" value="o" required /> Other
+                    <input type="checkbox" name="preferredGender_male" value="m"/> Male
+                    <input type="checkbox" name="preferredGender_female" value="f"/> Female
+                    <input type="checkbox" name="preferredGender_other" value="o"/> Other
                 </div>
             </div>
             <div class="mt-4">
@@ -186,20 +183,9 @@
 
                 </a>
 
-                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'ml-4']]); ?>
-<?php $component->withName('jet-button'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'ml-4']); ?>
-                    <?php echo e(__('Register')); ?>
-
-                 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?> 
+                <button onclick="submitAllIfNone()" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ml-4">
+                    Register
+                </button>
             </div>
         </form>
      <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
